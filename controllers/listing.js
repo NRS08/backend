@@ -3,10 +3,11 @@ const { BadRequestError, UnauthenticatedError } = require("../errors");
 
 const listing = async (req, res) => {
   const { name, role, Iname, harvestDate, amount, contact } = req.body;
-  if (!name || !role || !harvestDate || !amount || !contact) {
+  if (!name || !role || !Iname || !harvestDate || !amount || !contact) {
     throw new BadRequestError("Provide all info");
   }
   req.body.createdBy = req.user.userId;
+  // console.log(req.user.userId);
   const item = await ProductListing.create(req.body);
   res.status(201).json({ item });
 };
@@ -19,9 +20,7 @@ const getAllItems = async (req, res) => {
   }
 
   let result = ProductListing.find(queryProducts);
-  if (sort) {
-    result.sort(sort);
-  }
+
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * limit;
