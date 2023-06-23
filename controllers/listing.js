@@ -19,7 +19,7 @@ const getAllItems = async (req, res) => {
     queryProducts.name = { $regex: name, $options: "i" };
   }
 
-  let result = ProductListing.find(queryProducts);
+  let results = ProductListing.find(queryProducts);
 
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
