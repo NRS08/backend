@@ -9,6 +9,10 @@ const listingSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please Provide role"],
   },
+  Iname: {
+    type: String,
+    required: [true, "Please Provide Item Name"],
+  },
   harvestDate: {
     type: String,
     required: [true, "Please harvest date"],

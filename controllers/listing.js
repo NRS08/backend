@@ -11,4 +11,24 @@ const listing = async (req, res) => {
   res.status(201).json({ item });
 };
 
-module.exports = { listing };
+const getAllItems = async (req, res) => {
+  let queryProducts = {};
+  const { name } = req.query;
+  if (name) {
+    queryProducts.name = { $regex: name, $options: "i" };
+  }
+
+  let result = ProductListing.find(queryProducts);
+  if (sort) {
+    result.sort(sort);
+  }
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+  results.skip(skip).limit(limit);
+
+  const items = await result;
+  res.status(200).json({ items });
+};
+
+module.exports = { listing, getAllItems };
