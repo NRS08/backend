@@ -26,7 +26,7 @@ const getAllItems = async (req, res) => {
   const skip = (page - 1) * limit;
   results.skip(skip).limit(limit);
 
-  const items = await result;
+  const items = await results;
   res.status(200).json({ items });
 };
 
