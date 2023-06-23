@@ -2,7 +2,7 @@ const ProductListing = require("../modles/ProductListing");
 const { BadRequestError, UnauthenticatedError } = require("../errors");
 
 const listing = async (req, res) => {
-  const { name, role, harvestDate, amount, contact } = req.body;
+  const { name, role, Iname, harvestDate, amount, contact } = req.body;
   if (!name || !role || !harvestDate || !amount || !contact) {
     throw new BadRequestError("Provide all info");
   }
