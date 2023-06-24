@@ -33,4 +33,8 @@ const getAllItems = async (req, res) => {
   res.status(200).json({ items });
 };
 
-module.exports = { listing, getAllItems };
+const getId = async (req, res) => {
+  res.status(200).json({ id: req.user.userId });
+};
+
+module.exports = { listing, getAllItems, getId };
