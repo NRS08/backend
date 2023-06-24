@@ -14,9 +14,12 @@ const listing = async (req, res) => {
 
 const getAllItems = async (req, res) => {
   let queryProducts = {};
-  const { name } = req.query;
-  if (name) {
-    queryProducts.name = { $regex: name, $options: "i" };
+  const { Iname, status } = req.query;
+  if (Iname) {
+    queryProducts.Iname = { $regex: Iname, $options: "i" };
+  }
+  if (status) {
+    queryProducts.status = status;
   }
 
   let results = ProductListing.find(queryProducts);
