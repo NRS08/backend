@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please provide password"],
     minlength: 6,
   },
+  account: {
+    type: String,
+    required: [true, "Please connect to wallet"],
+  },
 });
 
 userSchema.pre("save", async function (next) {
