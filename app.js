@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const authRouter = require("./routes/auth");
 const listingRouter = require("./routes/listing");
+const requestRouter = require("./routes/buyingReq");
 const connectDB = require("./db/connect");
 const notFound = require("./middlewares/notFound");
 const errorHandler = require("./middlewares/errorHandler");
@@ -13,6 +14,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
+const { buyRequest } = require("./controllers/buyingReq");
 app.set("trust proxy", 1);
 app.use(
   rateLimiter({
@@ -30,6 +32,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/listing", authenticateUser, listingRouter);
+app.use("/api/v1/buying", authenticateUser, requestRouter);
 app.use(notFound);
 app.use(errorHandler);
 const port = process.env.PORT || 4000;
