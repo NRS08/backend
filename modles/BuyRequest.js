@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const buyRequest = new mongoose.Schema({
   prodID: {
     type: String,
-    required: [true, "Please Provide Name"],
+    required: [true, "Please Provide ID"],
   },
   Iname: {
     type: String,
