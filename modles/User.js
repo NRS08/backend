@@ -50,7 +50,7 @@ userSchema.methods.comparePassword = async function (canditatePassword) {
 
 userSchema.methods.createJWT = function () {
   return jwt.sign(
-    { userId: this._id, name: this.name },
+    { userId: this._id, name: this.name, account: this.account },
     process.env.JWT_SECRET,
     { expiresIn: "30d" }
   );

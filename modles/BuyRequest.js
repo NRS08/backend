@@ -34,6 +34,10 @@ const buyRequest = new mongoose.Schema({
     ref: "User",
     required: [true, "Please provide seller"],
   },
+  buyerAccount: {
+    type: String,
+    required: [true, "Please provide buyer account"],
+  },
   buyer: {
     type: mongoose.Types.ObjectId,
     ref: "User",

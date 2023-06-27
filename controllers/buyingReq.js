@@ -9,6 +9,7 @@ const buyRequest = async (req, res) => {
   if (seller == req.user.userId) {
     throw new BadRequestError("Buyer and Seller should be different");
   }
+  req.body.buyerAccount = req.user.account;
   req.body.buyer = req.user.userId;
   // console.log(req.user.userId);
   const request = await BuyRequest.create(req.body);

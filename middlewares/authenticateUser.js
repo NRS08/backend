@@ -11,7 +11,11 @@ const authenticateUser = (req, res, next) => {
   const token = authHeader.split(" ")[1];
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = { userId: decoded.userId, name: decoded.name };
+    req.user = {
+      userId: decoded.userId,
+      name: decoded.name,
+      account: decoded.account,
+    };
     next();
   } catch (error) {
     throw new UnauthenticatedError("Not Authirized");
