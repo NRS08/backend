@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const listingSchema = new mongoose.Schema({
+  prodID: {
+    type: String,
+    required: [true, "Please Provide ID"],
+  },
   name: {
     type: String,
     required: [true, "Please Provide Name"],
