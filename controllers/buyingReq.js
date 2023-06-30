@@ -27,4 +27,8 @@ const getBuyRequests = async (req, res) => {
   res.status(201).json({ requests });
 };
 
-module.exports = { buyRequest, getBuyRequests };
+const getWallet = async (req, res) => {
+  res.status(200).json({ account: req.user.account });
+};
+
+module.exports = { buyRequest, getBuyRequests, getWallet };
