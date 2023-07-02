@@ -29,6 +29,10 @@ const buyRequest = new mongoose.Schema({
     type: String,
     required: [true, "Please Provide Name"],
   },
+  contact: {
+    type: Number,
+    required: [true, "Please Provide contact no."],
+  },
   seller: {
     type: mongoose.Types.ObjectId,
     ref: "User",
