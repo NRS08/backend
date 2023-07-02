@@ -40,4 +40,16 @@ const getId = async (req, res) => {
   res.status(200).json({ id: req.user.userId });
 };
 
-module.exports = { listing, getAllItems, getId };
+const updateListed = async (req, res) => {
+  const { id } = req.params;
+  const item = await ProductListing.findOneAndUpdate({ prodID: id }, req.body, {
+    runValidators: true,
+    new: true,
+  });
+  if (!item) {
+    throw new BadRequestError(`No item with id ${id}`);
+  }
+  res.status(201).json({ item });
+};
+
+module.exports = { listing, getAllItems, getId, updateListed };

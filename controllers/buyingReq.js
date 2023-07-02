@@ -31,4 +31,31 @@ const getWallet = async (req, res) => {
   res.status(200).json({ account: req.user.account });
 };
 
-module.exports = { buyRequest, getBuyRequests, getWallet };
+const deleteRequest = async (req, res) => {
+  const { id: reqId } = req.params;
+  const { userId } = req.user;
+  const request = await BuyRequest.findByIdAndDelete({ _id: reqId });
+  if (!request) {
+    throw new BadRequestError(`No request with id ${reqId}`);
+  }
+  res.status(200).send();
+};
+
+const updateRequest = async (req, res) => {
+  const { id: reqId } = req.params;
+  const request = await BuyRequest.findByIdAndUpdate({ _id: reqId }, req.body, {
+    runValidators: true,
+  });
+  if (!request) {
+    throw new BadRequestError(`No request with id ${reqId}`);
+  }
+  res.status(201).json({ request });
+};
+
+module.exports = {
+  buyRequest,
+  getBuyRequests,
+  getWallet,
+  deleteRequest,
+  updateRequest,
+};
