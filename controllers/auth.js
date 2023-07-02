@@ -19,7 +19,7 @@ const login = async (req, res) => {
     throw new UnauthenticatedError("Wrong Password");
   }
   const token = user.createJWT();
-  res.status(200).json({ user: { name: user.name }, token });
+  res.status(200).json({ user: { name: user.name, role: user.role }, token });
 };
 
 module.exports = { register, login };
