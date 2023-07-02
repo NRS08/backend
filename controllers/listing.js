@@ -27,12 +27,19 @@ const getAllItems = async (req, res) => {
 
   let results = ProductListing.find(queryProducts);
 
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 10;
-  const skip = (page - 1) * limit;
-  results.skip(skip).limit(limit);
+  // const page = parseInt(req.query.page) || 1;
+  // const limit = parseInt(req.query.limit) || 10;
+  // const skip = (page - 1) * limit;
+  // results.skip(skip).limit(limit);
 
   const items = await results;
+  res.status(200).json({ items });
+};
+
+const getYourListedItems = async (req, res) => {
+  let queryProducts = {};
+  queryProducts.createdBy = req.user.userId;
+  const items = await ProductListing.find(queryProducts);
   res.status(200).json({ items });
 };
 
@@ -52,4 +59,10 @@ const updateListed = async (req, res) => {
   res.status(201).json({ item });
 };
 
-module.exports = { listing, getAllItems, getId, updateListed };
+module.exports = {
+  listing,
+  getAllItems,
+  getYourListedItems,
+  getId,
+  updateListed,
+};
